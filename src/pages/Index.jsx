@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { Box, Button, Container, FormControl, FormLabel, Input, Textarea, CheckboxGroup, Checkbox, Stack, Heading, Text, VStack, HStack } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Input, Textarea, CheckboxGroup, Checkbox, Stack, Heading, Text, VStack } from "@chakra-ui/react";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import CatImage from "../components/CatImage";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 
@@ -43,9 +44,36 @@ const Index = () => {
           <>
             <CatImage width="200px" height="300px" />
             <Heading>Address</Heading>
-            <FormControl id="address">
+            <FormControl id="address" isRequired>
               <FormLabel>Select address</FormLabel>
-              <Input type="text" placeholder="Search for your address" value={address} onChange={(e) => setAddress(e.target.value)} />
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={async (value) => {
+                  setAddress(value);
+                  try {
+                    const results = await geocodeByAddress(value);
+                    const latLng = await getLatLng(results[0]);
+                    console.log("Latitude and Longitude:", latLng);
+                  } catch (error) {
+                    console.error("Error:", error);
+                  }
+                }}
+              >
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                  <div>
+                    <Input {...getInputProps({ placeholder: "Search for your address" })} />
+                    <div>
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion) => (
+                        <div {...getSuggestionItemProps(suggestion)}>
+                          <span>{suggestion.description}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </PlacesAutocomplete>
             </FormControl>
             <Button rightIcon={<FaArrowRight />} colorScheme="teal" onClick={handleNextStep}>
               Next
