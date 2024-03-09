@@ -33,7 +33,7 @@ const Index = () => {
     handleNextStep();
   };
 
-  const commonBuildingProblems = ["Inefficient heating system", "Poor insulation", "Window drafts", "Inefficient lighting", "Outdated appliances"];
+  const commonBuildingProblems = ["Inefficient heating system", "Poor insulation", "Window drafts", "Inefficient lighting", "Outdated appliances", "Smelly tubes"];
 
   return (
     <Container maxW="xl" py={10}>
