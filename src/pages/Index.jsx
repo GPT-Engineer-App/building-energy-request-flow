@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 import { Box, Button, Container, FormControl, FormLabel, Input, Textarea, CheckboxGroup, Checkbox, Stack, Heading, Text, VStack, HStack } from "@chakra-ui/react";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
+
+const supabaseUrl = "https://vdnhjxmsuykhvhnvjupi.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZkbmhqeG1zdXlraHZobnZqdXBpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk4MjIyNjUsImV4cCI6MjAyNTM5ODI2NX0.byaihexABIEbRtnd1-n8R33kkt4lIwcB1xsX6P6PUA8";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const Index = () => {
   const [step, setStep] = useState(1);
@@ -16,9 +21,15 @@ const Index = () => {
     setStep((prevStep) => prevStep + 1);
   };
 
-  const handleSubmit = () => {
-    // Submit data to API or store in state for prototype
-    console.log({ address, floors, size, challenges, commonProblems, name, email });
+  const handleSubmit = async () => {
+    const { data, error } = await supabase.from("leads").insert([{ address, floors, size, challenges, commonProblems, name, email }]).select();
+
+    if (error) {
+      console.error("Error submitting data:", error);
+      return;
+    }
+
+    console.log("Submitted data:", data);
     handleNextStep();
   };
 
