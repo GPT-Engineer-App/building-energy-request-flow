@@ -40,7 +40,6 @@ const Index = () => {
       <VStack spacing={6}>
         {step === 1 && (
           <>
-            <Image src="https://placekitten.com/200/300" alt="Kitten Image" />
             <Heading>Address</Heading>
             <FormControl id="address">
               <FormLabel>Select address</FormLabel>
@@ -54,7 +53,6 @@ const Index = () => {
 
         {step === 2 && (
           <>
-            <Image src="https://placekitten.com/210/310" alt="Kitten Image" />
             <Heading>Building Details</Heading>
             <FormControl id="floors" isRequired>
               <FormLabel>Number of floors</FormLabel>
@@ -72,7 +70,6 @@ const Index = () => {
 
         {step === 3 && (
           <>
-            <Image src="https://placekitten.com/220/320" alt="Kitten Image" />
             <Heading>Energy Challenges</Heading>
             <FormControl id="challenges" isRequired>
               <FormLabel>Describe your biggest challenges</FormLabel>
@@ -98,7 +95,6 @@ const Index = () => {
 
         {step === 4 && (
           <>
-            <Image src="https://placekitten.com/230/330" alt="Kitten Image" />
             <Heading>Contact Info</Heading>
             <FormControl id="name" isRequired>
               <FormLabel>Your name</FormLabel>
