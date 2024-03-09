@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { Box, Button, Container, FormControl, FormLabel, Input, Textarea, CheckboxGroup, Checkbox, Stack, Heading, Text, VStack, HStack, Image } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Input, Textarea, CheckboxGroup, Checkbox, Stack, Heading, Text, VStack, HStack } from "@chakra-ui/react";
+import CatImage from "../components/CatImage";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 
 const supabaseUrl = "https://vdnhjxmsuykhvhnvjupi.supabase.co";
@@ -40,7 +41,7 @@ const Index = () => {
       <VStack spacing={6}>
         {step === 1 && (
           <>
-            <Image src="https://placekitten.com/200/300" alt="Cute kitten" />
+            <CatImage width="200px" height="300px" />
             <Heading>Address</Heading>
             <FormControl id="address">
               <FormLabel>Select address</FormLabel>
@@ -114,7 +115,7 @@ const Index = () => {
         {step > 4 && (
           <Box textAlign="center">
             <Heading>Thank You!</Heading>
-            <Image src="https://placekitten.com/200/300" alt="Cute kitten" />
+            <CatImage width="200px" height="300px" />
             <Text mt={4}>Our consultant team will be in touch with you shortly.</Text>
           </Box>
         )}
